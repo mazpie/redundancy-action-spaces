@@ -1,0 +1,6 @@
+hydra-core
+scipy
+shapely
+trimesh
+pyrender
+notebook

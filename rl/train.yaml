@@ -1,0 +1,61 @@
+defaults:
+  - _self_
+  - configs/default
+  - agent: sac
+  - configs: ${configs}
+  # - override hydra/launcher: submitit_local
+  - override hydra/launcher: joblib
+  - override hydra/hydra_logging: custom
+  - override hydra/job_logging: stdout
+
+# task settings
+task: none
+domain: walker # primal task will be infered in runtime
+# train settings
+num_train_frames: 500010
+num_seed_frames: 4000
+num_seed_episodes: ${num_workers}
+# eval
+eval_every_frames: 1000000000 # not necessary during pretrain
+num_eval_episodes: 10
+# snapshot
+snapshots: [100000, 500000, 1000000, 2000000] 
+snapshot_dir: ../../../pretrained_models/${obs_type}/${task}/${agent.name}/${seed}
+
+# replay buffer
+replay_buffer_size: 1000000
+num_workers: 4
+save_episodes: False
+preallocate_memory: False
+
+# misc
+seed: 1
+device: cuda
+use_tb: true
+use_wandb: true
+
+# experiment
+experiment: default
+project_name: ???
+flexible_gpu: true
+spread_envs: true
+
+# log settings
+log_every_frames: 2500
+log_best_episodes: True
+
+hydra:
+  run:
+    dir: ./exp_local/${now:%Y.%m.%d}/${now:%H%M%S}_${experiment}_${agent.name}_${obs_type}_${task}_${env.action_mode}_${seed}
+  sweep:
+    dir: ./exp_sweep/${now:%Y.%m.%d}/${now:%H%M%S}_${experiment}_${agent.name}_${obs_type}
+    subdir: ${task}_${env.action_mode}_${seed}_${hydra.job.num}
+
+  # launcher:
+  #   timeout_min: 4300
+  #   cpus_per_task: 2
+  #   gpus_per_node: 4
+  #   tasks_per_node: 1
+  #   mem_gb: 160
+  #   nodes: 1
+  #   submitit_folder: ./exp_sweep/${now:%Y.%m.%d}/${now:%H%M%S}_${agent.name}_${experiment}_${seed}/.slurm

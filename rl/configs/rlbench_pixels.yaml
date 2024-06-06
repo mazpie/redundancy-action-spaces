@@ -1,0 +1,9 @@
+# @package _global_
+obs_type: pixels
+action_repeat: 1
+encoder: {mlp_keys: '$^', cnn_keys: 'front_rgb', norm: none, cnn_depth: 48, cnn_kernels: [4, 4, 4, 4], mlp_layers: [400, 400, 400, 400]} 
+decoder: {mlp_keys: '$^', cnn_keys: 'front_rgb', norm: none, cnn_depth: 48, cnn_kernels: [5, 5, 6, 6], mlp_layers: [400, 400, 400, 400]} 
+replay.capacity: 2e6
+
+env:
+  action_mode: ee

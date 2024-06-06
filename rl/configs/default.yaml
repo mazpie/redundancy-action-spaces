@@ -1,0 +1,10 @@
+# @package _global_
+replay: {capacity: 2e6, ongoing: False, minlen: 50, maxlen: 50, prioritize_ends: False}
+discount: 0.99
+
+# RLBench defaults
+train_every_actions: 8
+parallel_envs: 12
+async_mode: 'FULL'
+batch_size: 128 
+batch_length: 2 

@@ -1,0 +1,12 @@
+ManiSkill2-Learn
+
+__pycache__
+exp_local
+exp_sweep
+pretrained_models/*
+pt_models
+nohup*
+data
+output.png
+exp_hydra_logs/*
+datasets/*

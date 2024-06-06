@@ -1,0 +1,23 @@
+# @package agent
+_target_: agent.sac.SACAgent
+name: sac
+obs_space: ??? # to be specified later
+act_space: ??? # to be specified later
+device: ${device}
+lr: 3e-4 # 1e-4 in ExORL
+critic_target_tau: 0.01 # 0.005 in SpinningUp # 0.01 in EXORL
+hidden_dim: 1024
+feature_dim: 50
+# entropy
+init_temperature: 0.1 # 0.1 was default
+action_target_entropy: neg # neg was default
+# 
+policy_delay: 1
+frame_stack: 1 # 3 for DMC pixels
+obs_keys: front_rgb|wrist_rgb|state # default for pixels
+drq_encoder: true
+drq_aug: true
+# normalization
+distributional: true
+normalize_reward: true
+normalize_returns: true

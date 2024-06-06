@@ -1,0 +1,15 @@
+exp_sweep
+exp_local
+__pycache__
+*.mp4
+*.jpeg
+datasets/*
+pt_models
+nohup*
+data
+output.png
+exp_hydra_logs/2*
+.ipynb_checkpoints/
+.git/*
+rw_demos/*
+rw_models/*
